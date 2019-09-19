@@ -4,6 +4,8 @@ const grid = document.createElement('div');
 grid.classList.add('grid-container');
 container.appendChild(grid);
 
+var isRainbow = false;
+
 function fillGrid() {
         
     var rows = prompt("How many rows?");
@@ -19,14 +21,18 @@ function fillGrid() {
     for (let x = 1; x <= rows*rows; x++) {
         const box = document.createElement('div');
         box.classList.add('grid-item');
-        box.addEventListener('mouseover', function (e) {
-            e.target.style.background = 'black';
-        });
+        box.addEventListener('mouseover', colors);
         grid.appendChild(box);
         box.setAttribute('id', x)
     }
+}
 
+function colors(){
 
+    if (isRainbow){
+        var randomColor = Math.floor(Math.random()*16777215).toString(16);
+        this.style.backgroundColor = "#" + randomColor;
+    } else this.style.backgroundColor = 'black';
 
 }
 
@@ -36,5 +42,9 @@ function clearGrid() {
     boxes.forEach(box => grid.removeChild(box));
     fillGrid();
 
+}
+
+function rainbow() {
+    isRainbow = !isRainbow;
 }
 
